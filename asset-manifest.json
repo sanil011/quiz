@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/quiz/static/js/main.bf360a9b.js",
+    "static/media/trophy.png": "/quiz/static/media/trophy.16e6df06d5ae2e4ee3f4.png",
+    "index.html": "/quiz/index.html",
+    "main.bf360a9b.js.map": "/quiz/static/js/main.bf360a9b.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.bf360a9b.js"
+  ]
+}
