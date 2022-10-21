@@ -1,19 +1,17 @@
 import Quiz from "./Quiz";
-import { useState } from "react";
 import End from "./End";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import Start from "./Start";
-
+import './style.css'
 function App() {
-  const dispatch = useDispatch();
-  const { step, answers } = useSelector((state) => state?.quiz);
-  const [show, setShow] = useState(0);
-  console.log(step)
+const { step } = useSelector((state) => state?.quiz);
+
+
   return (
     <>
       {step === 1 && <Start/>}
       {step === 3 && <End/>}
-        { step === 2 && <Quiz setShow={setShow} />}
+      {step === 2 && <Quiz/>}
     </>
   );
 }

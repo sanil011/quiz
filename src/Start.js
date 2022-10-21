@@ -5,7 +5,6 @@ import { startQuiz } from "./redux/quizAction";
 
 const Start = () => {
   const dispatch = useDispatch();
-//   const {time} = useSelector((state) => state.quiz)
   const [minute, setMinute] = useState(1);
   const [second, setSecond] = useState(0);
   const [time, setTime] = useState(60);
@@ -20,18 +19,23 @@ const Start = () => {
   useEffect(() => {
     if (minute > 59) {
       setMinute(1);
-    }
+      }
     if (second > 59) {
       setSecond(1);
-    }
-  }, [minute, second]);
+    }}
+    , [minute, second]
+    );
+
+
     useEffect(() => {
     console.log(minute);
     console.log(typeof minute);
     if (minute !== NaN && second !== NaN) {
-      setTime(minute * 60 + second);
-    }
-  }, [minute, second]);
+        setTime(minute * 60 + second)
+      }
+    }, [minute, second]);
+  
+  
   return (
     <div className="startBox">
 

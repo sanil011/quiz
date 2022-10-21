@@ -11,7 +11,7 @@ import {
 import data from './data';
 
 const Quiz = () => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const { activeQuestion ,answers ,time } = useSelector((state) => state.quiz)
   const [selected, setSelected] = useState("");
   const radiosWrapper = useRef();
@@ -19,6 +19,7 @@ const Quiz = () => {
   const [timer, setTimer] = useState(time);
 
 
+// to save time data when refresh
   useEffect(() => {
     if (timer > 0) {
      dispatch(timer1({time:timer}))
@@ -31,25 +32,21 @@ const Quiz = () => {
    
     
 
-    useEffect(() => {
+  useEffect(() => {
     setData(data?.data[activeQuestion]);
-
     if (answers[activeQuestion] != undefined) {
-
       setSelected(answers[activeQuestion].a);
-
     }
   }, [data1, activeQuestion]);
 
-  const handleNext = () => {
 
+//ON next click 
+  const handleNext = () => {
   let ans = [...answers];
     ans[activeQuestion] = {
       q: data1.question,
       a: selected,
     };
-    
-console.log(ans)
   dispatch(
       nextQuiz({
         answers: ans
@@ -61,15 +58,16 @@ console.log(ans)
     if (findCheckedInput) {
       findCheckedInput.checked = false;
     }
-
   };
 
+//on prev click 
   const handlePrev = () => {
     dispatch(prevQuiz())
   };
 
-  const handleSubmit = () => {
 
+//on submit click 
+  const handleSubmit = () => {
     let ans = [...answers];
     ans[activeQuestion] = {
       q: data.data[activeQuestion].question,
@@ -81,34 +79,28 @@ console.log(ans)
       }));
   }
 
-  const changeHandler = (e) => {
+//to save tick answer 
+const changeHandler = (e) => {
+ setSelected(e.target.value)
+}
 
-    setSelected(e.target.value)
-  }
-  console.log(activeQuestion)
   return (
     <div className="quiz-container" id="quiz">
       <div class="pattern-dots-md gray-light">
-
-      <section className="questionHead">
+       <section className="questionHead">
         <h3>
           Question {activeQuestion + 1}/{data?.data.length}
-          </h3>
+        </h3>
           
       </section>
         <div className="quiz-header">
           <h5 className='timer'>{timer}</h5>
-        <div className='question'>
-            <h2 id="question">{data.data[activeQuestion].question} </h2>
-             
+          <div className='question'>
+          <h2 id="question">{data.data[activeQuestion].question} </h2>       
         </div>
-
         <section className='options' ref={radiosWrapper}>  
           {data.data[activeQuestion].choices.map((choice, i) => (
-            <label key={i}
-              className= "text text-bg"
-              
-            >
+           <label key={i} className= "text text-bg">
               <input value={choice}
                 type="checkbox"
                 className='input'
@@ -118,7 +110,7 @@ console.log(ans)
               <span className='checkmark'></span>     
             </label>
               ))}
-        </section>
+      </section>
       </div>
       <section className="questionBottom">
         {activeQuestion <= 0 ? null : (
@@ -137,8 +129,8 @@ console.log(ans)
           </button>
         )}
       </section>
-      </div>
-      </div>
+     </div>
+    </div>
   )
 }
 

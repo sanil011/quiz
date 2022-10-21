@@ -10,13 +10,14 @@ const End = () => {
     const { answers } = useSelector((state) => state.quiz);
     const [correctAnswers, setCorrectAnswers] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
-    console.log(quizData.data[3].correct)
 
-    const handleAnswer = () => {
+
+  const handleAnswer = () => {
         setShowAnswer(true);
     }
-    console.log(answers)
-    useEffect(() => {
+  
+//matching user answer to correct answer 
+useEffect(() => {
     let correct = 0;
     answers.forEach((result, index) => {
       if (result.a === quizData?.data[index].correct) {
@@ -25,39 +26,42 @@ const End = () => {
     });
     setCorrectAnswers(correct);
   }, []);
-    const handleReset = () => {
-        
- dispatch(resetQuiz());
-    }
-    return (
 
-        <div className="endBox">
+
+// to reset the quiz
+const handleReset = () => {  
+    dispatch(resetQuiz());
+  }
+  
+
+  return (
+      <div className="endBox">
             <Confetti  />
-      <img src={Trophy} className="trophy" alt="trophy"  />
-      <h3 className="end-heading">Your results</h3>
-      <p className="end-text">
-        {correctAnswers} of {quizData?.data.length}
-      </p>
-      <p className="end-text">
-        <strong>
-          {Math.floor((correctAnswers / quizData?.data.length) * 100)}%
-        </strong>
-      </p>
-      <p>
-        {/* <strong>Your time:</strong> {time}sec */}
-      </p>
-      <section className="end-btn">
-        <button className="button check-btn" onClick={() => handleAnswer(true)}>
-          Check your answers
-        </button>
-        <button
-          className="button tryAgain-btn"
-          style={{ marginLeft: "20px" }}
-          onClick={handleReset}
-        >
-          Try again
-        </button>
-            </section>
+         <img src={Trophy} className="trophy" alt="trophy"  />
+         <h3 className="end-heading">Your results</h3>
+         <p className="end-text">
+          {correctAnswers} of {quizData?.data.length}
+        </p>
+        <p className="end-text">
+          <strong>
+            {Math.floor((correctAnswers / quizData?.data.length) * 100)}%
+          </strong>
+        </p>
+        <p>
+          {/* <strong>Your time:</strong> {time}sec */}
+        </p>
+        <section className="end-btn">
+          <button className="button check-btn" onClick={() => handleAnswer(true)}>
+            Check your answers
+          </button>
+          <button
+            className="button tryAgain-btn"
+            style={{ marginLeft: "20px" }}
+            onClick={handleReset}
+           >
+           Try again
+          </button>
+        </section>
 
             
        {showAnswer && <section className="modalBody">
@@ -90,8 +94,7 @@ const End = () => {
             </ul>
           </section>
         </section>}
-
-            </div>)
+   </div>)
 }
 
 export default End;
